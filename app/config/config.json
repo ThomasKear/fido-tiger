@@ -1,0 +1,21 @@
+ {
+  "development": {
+    "user": "root",
+    "password": "root",
+    "database": "fidodb",
+    "host": "localhost",
+    "dialect": "mysql"
+  },
+  "test": {
+    "user": "root",
+    "password": "root",
+    "database": "fidodb",
+    "host": "localhost",
+    "dialect": "mysql"
+  },
+  "production": {
+    "database": "fidodb",
+    "use_env_variable": "JAWSDB_URL",
+    "dialect": "mysql"
+  }
+}
