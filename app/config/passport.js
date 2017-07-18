@@ -4,7 +4,10 @@ var bCrypt = require('bcrypt');
 module.exports = function(passport, user) {
 
     var User = user;
+    var GOOGLE_CLIENT_ID = "624931815393-7mdcgv0kc4k049len9r0qvkp3qdm2v4s.apps.googleusercontent.com";
+    var GOOGLE_CLIENT_SECRET = "9qsw7CfkFJidL0k4ivLZyFq4";
     var LocalStrategy = require('passport-local').Strategy;
+    var GoogleStrategy = require('passport-google-oauth2').Strategy;
 
     /*Serialize & Deserialize User (Login & Logout)*/
     passport.serializeUser(function(user, done) {
@@ -14,6 +17,26 @@ module.exports = function(passport, user) {
     passport.deserializeUser(function(user, done) {
         done(null, user);
     });
+    /*Google OAuth Strategy*/
+    passport.use(new GoogleStrategy({
+            clientID: GOOGLE_CLIENT_ID,
+            clientSecret: GOOGLE_CLIENT_SECRET,
+            callbackURL: "http://localhost:8080/auth/google/callback",
+            passReqToCallback: true
+        },
+        function(request, accessToken, refreshToken, profile, done) {
+            User.findOrCreate({ googleId: profile.id }, function(err, user) {
+                process.nextTick(function() {
+
+                    // To keep the example simple, the user's Google profile is returned to
+                    // represent the logged-in user.  In a typical application, you would want
+                    // to associate the Google account with a user record in your database,
+                    // and return that user instead.
+                    return done(err, user);
+                });
+            });
+        }
+    ));
     /*Local Signup Strategy*/
     passport.use('local-signup', new LocalStrategy({
             usernameField: 'username',
