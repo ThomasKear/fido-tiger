@@ -13,17 +13,20 @@ var Router = router.Router;
 
 // Include the hashHistory prop to handle routing client side without a server
 // https://github.com/ReactTraining/react-router/blob/master/docs/guides/Histories.md#hashhistory
-var hashHistory = router.hashHistory;
+var hashHistory = Router.hashHistory;
 
 // Include the IndexRoute (catch-all route)
-var IndexRoute = router.IndexRoute;
+var IndexRoute = Router.IndexRoute;
 
 // expressRouter.get('*', function(req, res) {
    
 // });
 
 // Reference the high-level components
-var Main = require("../components/Main");
+import Main from "../components/Main";
+import Nav from "../components/global/Nav";
+import Footer from "../components/global/Footer";
+
 
 module.exports = (
 
@@ -31,6 +34,9 @@ module.exports = (
   <Router history={hashHistory}>
 
     <Route path="/" component={Main}>
+      <Route path="Nav" component={Nav}>
+      
+      </Route>
       <IndexRoute component={Main} />
     </Route>
 
