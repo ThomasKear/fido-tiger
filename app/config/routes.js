@@ -18,14 +18,19 @@ var hashHistory = Router.hashHistory;
 // Include the IndexRoute (catch-all route)
 var IndexRoute = Router.IndexRoute;
 
-// expressRouter.get('*', function(req, res) {
-   
-// });
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import ReduxPromise from 'redux-promise';
+
+
+import reducers from './reducers';
 
 // Reference the high-level components
 import Main from "../components/Main";
 import Nav from "../components/global/Nav";
 import Footer from "../components/global/Footer";
+import Greeting from "../components/global/Greeting";
+
 
 
 module.exports = (
@@ -35,7 +40,6 @@ module.exports = (
 
     <Route path="/" component={Main}>
       <Route path="Nav" component={Nav}>
-      
       </Route>
       <IndexRoute component={Main} />
     </Route>

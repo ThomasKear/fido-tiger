@@ -1,5 +1,11 @@
-const React = require("react");
-var Link = require("react-router").Link;
+import React from 'react';
+import {
+  BrowserRouter as Router,
+  Route,
+  Link
+} from 'react-router-dom';
+
+import Dashboard from '../user/Dashboard';
 
 
 

@@ -1,11 +1,12 @@
 //load bcrypt
-var bCrypt = require('bcrypt');
+const bCrypt = require('bcrypt');
+const ENV = require('../../env');
 
 module.exports = function(passport, user) {
 
     var User = user;
-    var GOOGLE_CLIENT_ID = "624931815393-7mdcgv0kc4k049len9r0qvkp3qdm2v4s.apps.googleusercontent.com";
-    var GOOGLE_CLIENT_SECRET = "9qsw7CfkFJidL0k4ivLZyFq4";
+    var GOOGLE_CLIENT_ID = process.env.CLIENT_ID;
+    var GOOGLE_CLIENT_SECRET = process.env.CLIENT_SECRET;
     var LocalStrategy = require('passport-local').Strategy;
     var GoogleStrategy = require('passport-google-oauth2').Strategy;
 
