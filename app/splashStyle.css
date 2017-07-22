@@ -20,7 +20,7 @@ body {
       margin-bottom: 30px;
   }  
   .jumbotron {
-      background: url('images/catDog.jpg');
+      /*background: url('images/catDog.jpg');*/
       background-repeat: no-repeat;
       background-position: top;
       display: block;

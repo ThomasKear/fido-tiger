@@ -1,5 +1,8 @@
-const React = require("react");
-var Link = require("react-router").Link;
+import React from 'react';
+import { Link } from 'react-router-dom';
+
+import Dashboard from '../user/Dashboard';
+import Login from '../user/Login';
 
 
 
@@ -12,23 +15,28 @@ class Greeting extends React.Component {
     }
     handleLoginClick() {
         this.setState({ isLoggedIn: true });
+        this.props.logIn(true);
     }
     handleLogoutClick() {
         this.setState({ isLoggedIn: false });
+        this.props.logIn(false);
+
     }
 
     render() {
+        // Login logout functions
         function LoginButton(props) {
             return (
-                <Link to="/Dashboard"><p onClick={props.onClick}>Login</p></Link>
+                <Link to="/Login"><p onClick={props.onClick}>Login</p></Link>
             );
         }
 
         function LogoutButton(props) {
             return (
-                <Link to="/Dashboard"><p onClick={props.onClick}>Logout</p></Link>
+                <Link to="/"><p onClick={props.onClick}>Logout</p></Link>
             );
         }
+        // Login switch
         const isLoggedIn = this.state.isLoggedIn;
         let button = null;
         if (isLoggedIn) {
@@ -36,8 +44,9 @@ class Greeting extends React.Component {
         } else {
             button = <LoginButton onClick={this.handleLoginClick} />;
         }
+        // Rendering
         return (
-            <div>{button}</div>
+            <a href="#">{button}</a>
 
         );
     }
