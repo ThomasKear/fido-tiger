@@ -4,6 +4,11 @@ body {
       line-height: 1.8;
       color: #818181;
   }
+  
+  h1{
+    margin-top: 60px;
+  }
+  
   h2 {
       font-size: 24px;
       text-transform: uppercase;
@@ -20,14 +25,13 @@ body {
       margin-bottom: 30px;
   }  
   .jumbotron {
-      /*background: url('images/catDog.jpg');*/
-      background-repeat: no-repeat;
+      background: url('/images/catDog.png') no-repeat;
       background-position: top;
       display: block;
       text-align: center;
       color: white;
-      text-shadow: 2px 2px 4px #000000;
-      padding: 100px 25px;
+      text-shadow: 4px 4px 3px #000000;
+      padding: 150px 50px;
       font-family: Montserrat, sans-serif;
   }
 
@@ -35,7 +39,6 @@ body {
     width:200px;
     float:right;
   }
-
 
   .container-fluid {
       padding: 60px 50px;
@@ -146,7 +149,7 @@ body {
       margin-bottom: 20px;
       color: #f4511e;
   }
-  .slideanim {visibility:hidden;}
+  .slideanim {visibility:visible;}
   .slide {
       animation-name: slide;
       -webkit-animation-name: slide;
