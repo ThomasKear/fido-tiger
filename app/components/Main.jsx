@@ -6,6 +6,7 @@ import Nav from './global/Nav';
 import Footer from './global/Footer';
 import Dashboard from './user/Dashboard';
 import Login from './user/Login';
+import Splash from './user/Splash';
 
 
 // Creating the Main component
@@ -26,19 +27,24 @@ class Main extends React.Component {
           <Login/>
           );
       }
+      function DisplaySplash(props) {
+        return(
+          <Splash/>
+          );
+      }
       // Login switch
       const loggedIn = this.state.loggedIn;
       let display = null;
       if (loggedIn){
         display = <DisplayLoggedIn logIn={this.logIn}/>;
       } else {
-        display = null;
+        display = <DisplaySplash/>;
       }
         return (
             <div>
                 <Nav logIn={this.logIn}/>              
                 <h1>Hello</h1>
-                <a href="/auth/google">Sign In with Google</a>
+                {/*<a href="/auth/google">Sign In with Google</a>*/}
                 <div>{display}</div>
               </div> 
 

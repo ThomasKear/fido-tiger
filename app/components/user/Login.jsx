@@ -8,6 +8,9 @@ class Login extends React.Component {
         super(props);
         this.state= {username: "", password: ""};
     }
+    handleSubmit(event) {
+        event.preventDefault();
+    }
     render() {
         return (
             <div className="col-sm-4">
@@ -20,7 +23,7 @@ class Login extends React.Component {
             <label htmlFor = "start-year"> Password </label> 
             <input value = { this.state.password }  type="text" className="form-control" id="password"required />
             </div>
-            <button type="submit" className="btn btn-default">Submit </button> 
+            <button type="submit" className="btn btn-default">Submit</button> 
             </form>
             </div>
         );

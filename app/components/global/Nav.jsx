@@ -19,7 +19,7 @@ class Nav extends React.Component {
                   <ul className="nav navbar-nav">
                     <ul className="nav navbar-nav navbar-right">
                       <li><Greeting logIn={this.props.logIn}/></li>
-                      <li className="dropdown">
+{/*                      <li className="dropdown">
                         <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span className="caret"></span></a>
                         <ul className="dropdown-menu">
                           <li><a href="#">Action</a></li>
@@ -28,7 +28,7 @@ class Nav extends React.Component {
                           <li role="separator" className="divider"></li>
                           <li><a href="#">Separated link</a></li>
                         </ul>
-                      </li>
+                      </li>*/}
                     </ul>
                   </ul>
                 </div>
