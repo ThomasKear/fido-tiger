@@ -67,26 +67,26 @@ class Splash extends React.Component {
   <div className="row text-center slideanim">
     <div className="col-sm-3">
       <div className="thumbnail">
-{/*        <img src="../app/images/boy.png" alt="Thomas" width="400" height="300">
-*/}        <p><strong>Thomas Kearney</strong></p>
+        <img src="images/boy.png" alt="Thomas" width="400" height="300"></img>
+        <p><strong>Thomas Kearney</strong></p>
          </div>
     </div>
     <div className="col-sm-3">
       <div className="thumbnail">
-{/*        <img src="../app/images/boy.png" alt="Elliott" width="400" height="300">
-*/}        <p><strong>Elliott Chalmers </strong></p>
+        <img src="images/boy.png" alt="Elliott" width="400" height="300"></img>
+        <p><strong>Elliott Chalmers </strong></p>
       </div>
     </div>
     <div className="col-sm-3">
       <div className="thumbnail">
-{/*        <img src="../app/images/boy.png" alt="Alex " width="400" height="300">
-*/}        <p><strong>Alex Lovell</strong></p>
+        <img src="images/boy.png" alt="Alex " width="400" height="300"></img>
+        <p><strong>Alex Lovell</strong></p>
       </div>
     </div>
     <div className="col-sm-3">
       <div className="thumbnail">
-{/*        <img src="../app/images/girl.png" alt="Terri " width="400" height="300">
-*/}        <p><strong>Terri Byers</strong></p>
+        <img src="images/girl.png" alt="Terri " width="400" height="300"></img>
+        <p><strong>Terri Byers</strong></p>
       </div>
     </div>
   </div><br/>
