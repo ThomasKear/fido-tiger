@@ -34,7 +34,7 @@ app.use(cookieParser());
 // Method Override
 app.use(methodOverride('_method'));
 // Static directory
-app.use(express.static('./public'));
+app.use(express.static(path.join(__dirname, 'public')));
 // app.use(require('./app/config/routes.js'));
 // Initialize Passport and restore authentication state, if any, from the
 // session.
