@@ -1,14 +1,22 @@
  {
   "development": {
     "user": "root",
+<<<<<<< HEAD
     "password": "caeser",
+=======
+    "password": "",
+>>>>>>> 962e4e1442986e424e466925b43a02bb7bb54c70
     "database": "fidoandtiger_db",
     "host": "localhost",
     "dialect": "mysql"
   },
   "test": {
     "user": "root",
+<<<<<<< HEAD
     "password": "caeser",
+=======
+    "password": "root",
+>>>>>>> 962e4e1442986e424e466925b43a02bb7bb54c70
     "database": "fidoandtiger_db",
     "host": "localhost",
     "dialect": "mysql"
