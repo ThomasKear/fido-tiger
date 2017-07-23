@@ -36,4 +36,6 @@ render(
   document.getElementById('root')
 );
 
+module.exports = Calendar;
+
 
