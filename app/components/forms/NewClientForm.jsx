@@ -1,189 +1,216 @@
-import React from 'react'
-import { Form, Text, Select, Textarea, Checkbox, Radio, RadioGroup, NestedForm, FormError } from 'react-form'
- 
-const MyForm = (
-  <Form
-    onSubmit={(values) => {
-      console.log('Success!', values)
-    }}
- 
-    // Let's give the form some default values 
-    defaultValues={{
-      friends: []
-    }}
- 
-    // Validating your form is super easy, just use the `validate` life-cycle method 
-    validate={values => {
-      const { name, hobby, status, friends, address } = values
-      return {
-        name: !name ? 'A name is required' : undefined,
-        hobby: (hobby && hobby.length < 5) ? 'Your hobby must be at least 5 characters long' : false,
-        status: !status ? 'A status is required' : null,
-        friends: (!friends || !friends.length) ? 'You need at least one friend!' : friends.map(friend => {
-          const { name, relationship } = friend
-          return {
-            name: !name ? 'A name is required' : undefined,
-            relationship: !relationship ? 'A relationship is required' : undefined
-          }
-        }),
-        address: !address ? 'A valid address is required' : 0
-      }
-    }}
- 
-    // `onValidationFail` is another handy form life-cycle method 
-    onValidationFail={() => {
-      window.alert('There is something wrong with your form!  Please check for any required values and try again :)')
-    }}
-  >
-    {({ values, submitForm, addValue, removeValue, getError }) => {
-      // A Form's direct child will usually be a function that returns a component 
-      // This way you have access to form methods and form values to use in your component. See the docs for a complete list. 
-      return (
-        // When the form is submitted, call the `submitForm` callback prop 
-        <form onSubmit={submitForm}>
- 
-          <div>
-            <h6>Full Name</h6>
-            <Text // This is the built-in Text formInput 
-              field='name' // field is a string version of the field location 
-              placeholder='Your name' // all other props are sent through to the underlying component, in this case an <input /> 
-            />
-          </div>
- 
-          <div>
-            <h6>Relationship Status</h6>
-            <Select // This is the built-in Select formInput 
-              field='status'
-              options={[{ // You can ship it some options like usual 
-                label: 'Single',
-                value: 'single'
-              }, {
-                label: 'In a Relationship',
-                value: 'relationship'
-              }, {
-                label: 'It\'s Complicated',
-                value: 'complicated'
-              }]}
-            />
-          </div>
- 
-          <div>
-            <h6>Short Bio</h6>
-            <Textarea // This is the built-in Textarea formInput 
-              field='bio'
-              placeholder='Short Bio'
-            />
-          </div>
- 
-          {/* Arrays in forms are super easy to handle */}
-          <h6>Friends</h6>
-          {/* This is a custom form error for the root of the friends list (see validation function) */}
-          <FormError field='friends' />
-          <div className='nested'>
-            {!values.friends.length ? (
-              <em>No friends have been added yet</em>
-            ) : values.friends.map((friends, i) => ( // Loop over the values however you'd like 
-              <div key={i}>
- 
-                <div>
-                  <h6>Full Name</h6>
-                  <Text
-                    field={['friends', i, 'name']} // You can easily pass an array-style field path. Perfect for passing down as props or nested values 
-                    placeholder='Friend Name'
-                  />
-                </div>
- 
-                <div>
-                  <h6>Relationship</h6>
-                  <Select
-                    field={`friends.${i}.relationship`} // If you don't like arrays, you can also use a string template 
-                    options={[{
-                      label: 'Friend',
-                      value: 'friend'
-                    }, {
-                      label: 'Acquaintance',
-                      value: 'acquaintance'
-                    }, {
-                      label: 'Colleague',
-                      value: 'colleague'
-                    }]}
-                  />
-                </div>
- 
-                <button // This button will remove this friend from the `friends` field 
-                  type='button'
-                  onClick={() => removeValue('friends', i)} // `removeValue` takes a field location for an array, and the index for the item to remove 
-                >
-                  Remove Friend
-                </button>
- 
-              </div>
-            ))}
-          </div>
- 
-          <div>
-            <button // This button will add a new blank friend item to the `friends` field 
-              type='button'
-              onClick={() => addValue('friends', {})} // `addValue` takes an array-like field, and the value to add 
-            >
-              Add Friend
-            </button>
-          </div>
- 
-          <div>
-            <h6>Address</h6>
-            {/* An address has a couple of parts to it, and will probably have its own validation function. */}
-            {/* Let's make it reusable by using a nested form */}
-            <NestedForm
-              field='address' // The results of this nested form will be set to this field value on this form. 
-            >
-              {AddressForm} // This is our reusable address form (see below) 
-            </NestedForm>
-          </div>
- 
-          <div>
-            <label>
-              <Checkbox // This is the built-in checkbox formInput 
-                field='createAccount'
-              />
-              <span>Create Account?</span>
+import React from "react";
+var Link = require("react-router").Link;
+
+var STATES = [
+  'AL', 'AK', 'AS', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FL', 'GA', 'HI',
+  'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS',
+  'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR',
+  'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY'
+]
+
+var Example = React.createClass({
+  getInitialState: function() {
+    return {
+      email: true
+    , question: true
+    , submitted: null
+    }
+  }
+
+, render: function() {
+    var submitted
+    if (this.state.submitted !== null) {
+      submitted = <div className="alert alert-success">
+        <p>ContactForm data:</p>
+        <pre><code>{JSON.stringify(this.state.submitted, null, '  ')}</code></pre>
+      </div>
+    }
+
+    return <div>
+      <div className="panel panel-default">
+        <div className="panel-heading clearfix">
+          <h3 className="panel-title pull-left">Contact Form</h3>
+          <div className="pull-right">
+            <label className="checkbox-inline">
+              <input type="checkbox"
+                checked={this.state.email}
+                onChange={this.handleChange.bind(this, 'email')}
+              /> Email
+            </label>
+            <label className="checkbox-inline">
+              <input type="checkbox"
+                checked={this.state.question}
+                onChange={this.handleChange.bind(this, 'question')}
+              /> Question
             </label>
           </div>
- 
-          <div>
-            <h6>Notify me via</h6>
-            <RadioGroup field="notificationType">
-              <label>
-                <Radio // This is the built-in radio formInput 
-                  value='email' // This is the value the field will be set to when this radio button is active 
-                />
-                <span>Email</span>
-              </label>
-              <label>
-                <Radio
-                  value='text'
-                />
-                <span>Text</span>
-              </label>
-              <label>
-                <Radio
-                  value='phone'
-                />
-                <span>Phone</span>
-              </label>
-            </RadioGroup>
-          </div>
- 
-          <br />
-          <br />
- 
-          {/* // Since this is the parent form, let's put a submit button in there ;) */}
-          {/* // You can submit your form however you want, as long as you call the `submitForm` callback */}
-          <button>
-            Submit
-          </button>
-        </form>
-      )
-    }}
-  </Form>
-)
+        </div>
+        <div className="panel-body">
+          <ContactForm ref="contactForm"
+            email={this.state.email}
+            question={this.state.question}
+            company={this.props.company}
+          />
+        </div>
+        <div className="panel-footer">
+          <button type="button" className="btn btn-primary btn-block" onClick={this.handleSubmit}>Submit</button>
+        </div>
+      </div>
+      {submitted}
+    </div>
+  }
+
+, handleChange: function(field, e) {
+    var nextState = {}
+    nextState[field] = e.target.checked
+    this.setState(nextState)
+  }
+
+, handleSubmit: function() {
+    if (this.refs.contactForm.isValid()) {
+      this.setState({submitted: this.refs.contactForm.getFormData()})
+    }
+  }
+})
+
+/**
+ * A contact form with certain optional fields.
+ */
+var ContactForm = React.createClass({
+  getDefaultProps: function() {
+    return {
+      email: true
+    , question: false
+    }
+  }
+
+, getInitialState: function() {
+    return {errors: {}}
+  }
+
+, isValid: function() {
+    var fields = ['firstName', 'lastName', 'phoneNumber', 'address', 'city', 'state', 'zipCode']
+    if (this.props.email) fields.push('email')
+    if (this.props.question) fields.push('question')
+
+    var errors = {}
+    fields.forEach(function(field) {
+      var value = trim(this.refs[field].getDOMNode().value)
+      if (!value) {
+        errors[field] = 'This field is required'
+      }
+    }.bind(this))
+    this.setState({errors: errors})
+
+    var isValid = true
+    for (var error in errors) {
+      isValid = false
+      break
+    }
+    return isValid
+  }
+
+, getFormData: function() {
+    var data = {
+      firstName: this.refs.firstName.getDOMNode().value
+    , lastName: this.refs.lastName.getDOMNode().value
+    , phoneNumber: this.refs.phoneNumber.getDOMNode().value
+    , address: this.refs.address.getDOMNode().value
+    , city: this.refs.city.getDOMNode().value
+    , state: this.refs.state.getDOMNode().value
+    , zipCode: this.refs.zipCode.getDOMNode().value
+    , currentCustomer: this.refs.currentCustomerYes.getDOMNode().checked
+    }
+    if (this.props.email) data.email = this.refs.email.getDOMNode().value
+    if (this.props.question) data.question = this.refs.question.getDOMNode().value
+    return data
+  }
+
+, render: function() {
+    return <div className="form-horizontal">
+      {this.renderTextInput('firstName', 'First Name')}
+      {this.renderTextInput('lastName', 'Last Name')}
+      {this.renderTextInput('phoneNumber', 'Phone number')}
+      {this.props.email && this.renderTextInput('email', 'Email')}
+      {this.props.question && this.renderTextarea('question', 'Question')}
+      {this.renderTextInput('address', 'Address')}
+      {this.renderTextInput('city', 'City')}
+      {this.renderSelect('state', 'State', STATES)}
+      {this.renderTextInput('zipCode', 'Zip Code')}
+      {this.renderRadioInlines('currentCustomer', 'Are you currently a ' + this.props.company + ' Customer?', {
+        values: ['Yes', 'No']
+      , defaultCheckedValue: 'No'
+      })}
+    </div>
+  }
+
+, renderTextInput: function(id, label) {
+    return this.renderField(id, label,
+      <input type="text" className="form-control" id={id} ref={id}/>
+    )
+  }
+
+, renderTextarea: function(id, label) {
+    return this.renderField(id, label,
+      <textarea className="form-control" id={id} ref={id}/>
+    )
+  }
+
+, renderSelect: function(id, label, values) {
+    var options = values.map(function(value) {
+      return <option value={value}>{value}</option>
+    })
+    return this.renderField(id, label,
+      <select className="form-control" id={id} ref={id}>
+        {options}
+      </select>
+    )
+  }
+
+, renderRadioInlines: function(id, label, kwargs) {
+    var radios = kwargs.values.map(function(value) {
+      var defaultChecked = (value == kwargs.defaultCheckedValue)
+      return <label className="radio-inline">
+        <input type="radio" ref={id + value} name={id} value={value} defaultChecked={defaultChecked}/>
+        {value}
+      </label>
+    })
+    return this.renderField(id, label, radios)
+  }
+
+, renderField: function(id, label, field) {
+    return <div className={$c('form-group', {'has-error': id in this.state.errors})}>
+      <label htmlFor={id} className="col-sm-4 control-label">{label}</label>
+      <div className="col-sm-6">
+        {field}
+      </div>
+    </div>
+  }
+})
+
+React.renderComponent(<Example company="FidoandTiger"/>, document.getElementById('contactform'))
+
+// Utils
+
+var trim = function() {
+  var TRIM_RE = /^\s+|\s+$/g
+  return function trim(string) {
+    return string.replace(TRIM_RE, '')
+  }
+}()
+
+function $c(staticClassName, conditionalClassNames) {
+  var classNames = []
+  if (typeof conditionalClassNames == 'undefined') {
+    conditionalClassNames = staticClassName
+  }
+  else {
+    classNames.push(staticClassName)
+  }
+  for (var className in conditionalClassNames) {
+    if (!!conditionalClassNames[className]) {
+      classNames.push(className)
+    }
+  }
+  return classNames.join(' ')
+}
