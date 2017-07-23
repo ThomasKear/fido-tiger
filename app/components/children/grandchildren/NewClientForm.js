@@ -187,7 +187,7 @@ var ContactForm = React.createClass({
   }
 })
 
-React.renderComponent(<Example company="FakeCo"/>, document.getElementById('contactform'))
+React.renderComponent(<Example company="FidoandTaiger"/>, document.getElementById('contactform'))
 
 // Utils
 
