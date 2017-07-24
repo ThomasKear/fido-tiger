@@ -1,5 +1,6 @@
 import React from 'react';
 import { render } from 'react-dom';
+const Link = require("react-router").Link;
 
 import InfiniteCalendar,{
 	Calendar,
@@ -35,5 +36,7 @@ render(
 	/>,
   document.getElementById('root')
 );
+
+export default InfiniteCalendar;
 
 
