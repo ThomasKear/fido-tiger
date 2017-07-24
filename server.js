@@ -67,6 +67,8 @@ app.get('/auth/google/callback',
     res.redirect('/');
   });
 
+
+
 // Starts the server to begin listening
 // =============================================================
 db.sequelize.sync().then(function() {

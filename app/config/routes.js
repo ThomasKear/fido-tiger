@@ -33,7 +33,12 @@ import Footer from "../components/global/Footer";
 import Greeting from "../components/global/Greeting";
 import Login from "../components/user/Login";
 import Dashboard from "../components/user/Dashboard";
+<<<<<<< HEAD
 {/*import ContactUs from "../components/user/forms/ContactUs";*/}
+=======
+import InfiniteCalendar from "../components/forms/calendar";
+
+>>>>>>> 6041978689380ca152e28892fcbd542bf41cbdf5
 
 
 
