@@ -2,6 +2,8 @@ import React from "react";
 var Link = require("react-router").Link;
 import '../../splashStyle.css';
 
+var ContactUs = require("./forms/ContactUs")
+
 class Splash extends React.Component {
     constructor(props) {
         super(props);
@@ -19,8 +21,8 @@ class Splash extends React.Component {
       <h2>About Us</h2><br/>
       <h4>Fido and Tiger is a personalized pet care service provider.  From walks, to feeding to pet delivery services, we are here to help you and your pet.</h4><br/>
       <p>Customize your service!  If you want playtimes, walks (long or short), medicine dispensed, or your pets fed, we are here for you.  Our professional staff is reliable, friendly, and trustworthy.  We know your pet means the world to you and we want to assist you in giving them the best care possible. Just let us know what you need and times that you desire and we will set up a package for you! </p>
-      <br/><button className="btn btn-default btn-lg">Contact us!</button>
-    </div>
+      <br/><button className="btn btn-default btn-lg" onClick={this.handleChange}>  Contact us!</button>
+    </div> 
     <div className="col-sm-4">
       <span className="glyphicon glyphicon-home logo"></span>
     </div>

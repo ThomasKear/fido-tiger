@@ -7,6 +7,7 @@ import Footer from './global/Footer';
 import Dashboard from './user/Dashboard';
 import Login from './user/Login';
 import Splash from './user/Splash';
+import ContactUs from './user/forms/ContactUs';
 
 
 // Creating the Main component
